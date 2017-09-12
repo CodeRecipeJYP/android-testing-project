@@ -1,24 +1,29 @@
 package com.teamtreehouse.testingbase;
 
+import android.os.Build;
 import android.view.inputmethod.EditorInfo;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * Created by jaeyoung on 12/09/2017.
  */
-
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class MainActivityTest {
 
     MainActivity activity;
 
     @Before
     public void setUp() {
-        activity = new MainActivity();
-        activity.onCreate(null); // for the savedInstanceState , always null when started first time
+        activity = Robolectric.setupActivity(MainActivity.class);
     }
 
     @Test
