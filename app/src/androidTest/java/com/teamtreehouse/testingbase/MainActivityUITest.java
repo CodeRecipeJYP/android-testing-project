@@ -1,5 +1,6 @@
 package com.teamtreehouse.testingbase;
 
+import android.graphics.Color;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -8,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -41,10 +43,12 @@ public class MainActivityUITest {
     @Test
     public void spinnerUpdatesBackgroundColor() throws Exception {
         // Arrange
-
+        int givenColor = Color.GREEN;
+        String spinnerItemText = "Green";
 
         // Act
-
+        onView(withId(R.id.colorSpinner)).perform(click());
+        onView(withText(spinnerItemText)).perform(click());
 
         // Assert
 
