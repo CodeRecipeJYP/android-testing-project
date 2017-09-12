@@ -56,8 +56,8 @@ public class MainActivityUITest {
         String spinnerItemText = "Green";
 
         // Act
-//        onView(withId(R.id.colorSpinner)).perform(click());
-//        onData(allOf(is(instanceOf(String.class)), is(spinnerItemText))).perform(click());
+        onView(withId(R.id.colorSpinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(spinnerItemText))).perform(click());
 
         // Assert
         BoundedMatcher backgroundColorMatcher
