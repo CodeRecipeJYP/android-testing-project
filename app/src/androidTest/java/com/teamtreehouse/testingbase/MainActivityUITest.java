@@ -23,6 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.AllOf.allOf;
 
 /**
@@ -80,12 +81,12 @@ public class MainActivityUITest {
     @Test
     public void buttonLaunchesOtherActivity() throws Exception {
         // Arrange
-
+        String otherActivityString = "Other Activity";
 
         // Act
-
+        onView(withId(R.id.launchActivityButton)).perform(click());
 
         // Assert
-
+        onView(withText(otherActivityString)).check(matches(notNullValue()));
     }
 }
