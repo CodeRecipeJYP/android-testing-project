@@ -33,7 +33,7 @@ public class MainActivityTest {
         activity.editText.setText(givenString);
 
         // Act
-//        activity.editText.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        activity.editText.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
         // Assert
         String actualString = activity.textView.getText().toString();
