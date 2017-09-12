@@ -1,13 +1,19 @@
 package com.teamtreehouse.testingbase;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
+import android.widget.LinearLayout;
 
+import org.hamcrest.Description;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
@@ -15,6 +21,9 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.AllOf.allOf;
 
 /**
  * Created by jaeyoung on 12/09/2017.
@@ -43,15 +52,29 @@ public class MainActivityUITest {
     @Test
     public void spinnerUpdatesBackgroundColor() throws Exception {
         // Arrange
-        int givenColor = Color.GREEN;
+        final int givenColor = Color.GREEN;
         String spinnerItemText = "Green";
 
         // Act
-        onView(withId(R.id.colorSpinner)).perform(click());
-        onView(withText(spinnerItemText)).perform(click());
+//        onView(withId(R.id.colorSpinner)).perform(click());
+//        onData(allOf(is(instanceOf(String.class)), is(spinnerItemText))).perform(click());
 
         // Assert
+        BoundedMatcher backgroundColorMatcher
+                = new BoundedMatcher<View, LinearLayout>(LinearLayout.class) {
+            @Override
+            protected boolean matchesSafely(LinearLayout linearLayout) {
+                int actualColor = ((ColorDrawable) linearLayout.getBackground()).getColor();
+                return givenColor == actualColor;
+            }
 
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("background color should equal : " + givenColor);
+            }
+        };
+
+        onView(withId(R.id.linearLayout)).check(matches(backgroundColorMatcher));
     }
 
     @Test
