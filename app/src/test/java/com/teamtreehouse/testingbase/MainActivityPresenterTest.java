@@ -1,5 +1,7 @@
 package com.teamtreehouse.testingbase;
 
+import android.graphics.Color;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,21 +29,36 @@ public class MainActivityPresenterTest {
 
     @Test
     public void editTextUpdated() throws Exception {
+        // Arranae
         String givenString = "test123";
 
+        // Act
         presenter.editTextUpdated(givenString);
 
+        // Assert
         Mockito.verify(view).changeTextViewText(givenString);
     }
 
     @Test
     public void colorSelected() throws Exception {
+        // Arrange
+        int index = 2;
+        int givenColor = Color.GREEN;
 
+        // Act
+        presenter.colorSelected(index);
+
+        // Assert
+        Mockito.verify(view).changeBackgroundColor(givenColor);
     }
 
     @Test
     public void launchOtherActivityButtonClicked() throws Exception {
+        Class clazz = OtherActivity.class;
 
+        presenter.launchOtherActivityButtonClicked(clazz);
+
+        Mockito.verify(view).launchOtherActivity(clazz);
     }
 
 }
